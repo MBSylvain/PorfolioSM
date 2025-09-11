@@ -10,14 +10,14 @@ const projects = [
 
 export default function ProjectFilter() {
   const [filter, setFilter] = useState('All');
-  const filtered = filter === 'All' ? projects : projects.filter(p => p.tech === filter);
+  const filtered = filter === 'All' ? projects : projects.filter(p => p.context === filter);
 
   return (
-    <div className=' '>
-    <section id="projects" className="py-16 px-6 bg-gray-50">
-      <h2 className="text-3xl font-semibold mb-6 text-center">Mes projets de Formations </h2>
+    <div className=''>
+    <section id="projects" className="px-6 py-16 bg-gray-50">
+      <h2 className="mb-6 text-3xl font-semibold text-center">Mes projets  </h2>
       <div className="flex justify-center gap-4 mb-6">
-        {['All', 'PHP', 'React', 'MySQL'].map(tech => (
+        {['All', 'Formation', 'Personnel', 'Professionnel', 'Autres'].map(tech => (
           <button
             key={tech}
             onClick={() => setFilter(tech)}
@@ -27,9 +27,15 @@ export default function ProjectFilter() {
           </button>
         ))}
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
         {filtered.map(project => (
-          <ProjectCard key={project.id} title={project.title} tech={project.tech} />
+          <ProjectCard
+            key={project.id}
+            title={project.title}
+            tech={project.tech}
+            details={project.details}
+            context={project.context}
+          />
         ))}
       </div>
     </section>

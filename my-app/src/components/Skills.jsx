@@ -7,13 +7,20 @@ export default function Skills() {
   ];
 
   return (
-    <section className="py-16 px-6 bg-white text-center">
-      <h2 className="text-3xl font-semibold mb-6">Compétences</h2>
+    <section className="px-6 py-16 text-center bg-white">
+      <h2 className="mb-6 text-3xl font-semibold">Compétences</h2>
       <div className="flex flex-wrap justify-center gap-6">
         {skills.map(skill => (
-          <div key={skill.name} className="bg-gray-100 p-4 rounded shadow w-40">
+          <div 
+            key={skill.name} 
+            className="w-40 p-4 transition-all duration-300 bg-gray-100 rounded shadow hover:bg-gray-50 hover:shadow-lg hover:scale-105"
+          >
+            {skill.icon && (
+              <div className="flex justify-center mb-3">
+                {skill.icon}
+              </div>
+            )}
             <h3 className="font-bold">{skill.name}</h3>
-            <p>{'★'.repeat(skill.level)}{'☆'.repeat(5 - skill.level)}</p>
           </div>
         ))}
       </div>
