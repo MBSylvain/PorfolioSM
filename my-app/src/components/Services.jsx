@@ -1,3 +1,5 @@
+import React from 'react';
+
 export default function Services() {
   return (
     <section id="services" className="px-6 py-16 text-center bg-gray-50">

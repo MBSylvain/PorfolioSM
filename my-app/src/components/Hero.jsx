@@ -9,7 +9,14 @@ export default function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
       >
-        <h1 className="mb-4 text-5xl font-bold text-[#222222]">Développeur Web et web mobile </h1>
+        <motion.h1
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="mb-4 text-5xl font-bold text-[#222222]"
+        >
+          Développeur Web et web mobile
+        </motion.h1>
         <p className="mb-6 text-lg text-[#5A6D7A]">
           Je conçois des sites personnalisés et performants pour les indépendants et petites entreprises.
         </p>

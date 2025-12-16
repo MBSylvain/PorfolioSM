@@ -1,22 +1,34 @@
+import React from 'react';
+import { useState } from 'react';
+import { FaBars, FaTimes } from 'react-icons/fa';
 
 export default function Header() {
+  const [menuOpen, setMenuOpen] = useState(false);
   return (
-    <header className="sticky top-0 z-50 py-6 text-[#222222] shadow-lg bg-gradient-to-r from-[#F5F5F5] to-[#D6D3CD]">
+    <header className="sticky top-0 z-50 py-6 font-sans shadow-lg bg-gradient-to-r from-[#F5F5F5] to-[#D6D3CD] dark:from-gray-900 dark:to-gray-800 text-[#222222] dark:text-white">
       <div className="container px-4 mx-auto">
         <div className="flex items-center justify-between">
-          <a href="#" className="text-2xl font-bold text-[#333333] transition-colors duration-300 hover:text-[#5A6D7A]">Sylvain MBEUMOU</a>
-          <nav className="hidden space-x-8 md:flex">
-            <a href="#about" className="text-[#333333] transition-colors duration-300 hover:text-[#5A6D7A]">À propos</a>
-            <a href="#projects" className="text-[#333333] transition-colors duration-300 hover:text-[#5A6D7A]">Projets</a>
-            <a href="#services" className="text-[#333333] transition-colors duration-300 hover:text-[#5A6D7A]">Services</a>
-            <a href="#contact" className="text-[#333333] transition-colors duration-300 hover:text-[#5A6D7A]">Contact</a>
+          <a href="#" className="text-2xl font-bold text-[#333333] dark:text-white transition-colors duration-300 hover:text-[#5A6D7A]">Sylvain MB</a>
+          <nav className="hidden space-x-8 md:flex" aria-label="Navigation principale">
+            <a href="#about" className="transition-colors duration-300 hover:text-[#5A6D7A]">À propos</a>
+            <a href="#projects" className="transition-colors duration-300 hover:text-[#5A6D7A]">Projets</a>
+            <a href="#services" className="transition-colors duration-300 hover:text-[#5A6D7A]">Services</a>
+            <a href="#contact" className="transition-colors duration-300 hover:text-[#5A6D7A]">Contact</a>
           </nav>
-          <button className="md:hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
+          {/* Menu burger mobile */}
+          <button className="md:hidden p-2 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-primary" aria-label={menuOpen ? 'Fermer le menu' : 'Ouvrir le menu'} onClick={() => setMenuOpen(!menuOpen)}>
+            {menuOpen ? <FaTimes className="w-6 h-6" /> : <FaBars className="w-6 h-6" />}
           </button>
         </div>
+        {/* Menu mobile */}
+        {menuOpen && (
+          <nav className="flex flex-col items-center mt-4 space-y-4 md:hidden bg-white dark:bg-gray-900 py-4 rounded shadow-lg" aria-label="Navigation mobile">
+            <a href="#about" className="transition-colors duration-300 hover:text-[#5A6D7A]" onClick={() => setMenuOpen(false)}>À propos</a>
+            <a href="#projects" className="transition-colors duration-300 hover:text-[#5A6D7A]" onClick={() => setMenuOpen(false)}>Projets</a>
+            <a href="#services" className="transition-colors duration-300 hover:text-[#5A6D7A]" onClick={() => setMenuOpen(false)}>Services</a>
+            <a href="#contact" className="transition-colors duration-300 hover:text-[#5A6D7A]" onClick={() => setMenuOpen(false)}>Contact</a>
+          </nav>
+        )}
       </div>
     </header>
   );

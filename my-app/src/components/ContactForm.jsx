@@ -1,4 +1,6 @@
+import React from "react";
 import { useState } from "react";
+import { FaUser, FaEnvelope, FaRegCommentDots, FaCheckCircle } from 'react-icons/fa';
 
 export default function ContactForm() {
   const initialState = {
@@ -63,54 +65,64 @@ export default function ContactForm() {
     };
 
     return (
-      <section id="contact" className="px-6 py-16 bg-white">
-        <h2 className="mb-4 text-3xl font-semibold text-center">Contact</h2>
+      <section id="contact" className="px-6 py-16 bg-white dark:bg-gray-900 font-sans">
+        <h2 className="mb-4 text-3xl font-semibold text-center text-gray-900 dark:text-white flex items-center justify-center gap-2">
+          <FaRegCommentDots className="text-primary text-2xl" /> Contact
+        </h2>
         <form className="max-w-lg mx-auto space-y-6" onSubmit={handleSubmit} noValidate>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <div>
-              <label htmlFor="firstName" className="block mb-2 text-sm font-bold text-gray-700">Prénom:</label>
+              <label htmlFor="firstName" className="flex mb-2 text-sm font-bold text-gray-700 dark:text-gray-200 items-center gap-1"><FaUser /> Prénom:</label>
               <input
                 type="text"
                 id="firstName"
                 value={values.firstName}
                 onChange={handleChange}
                 placeholder="Votre prénom"
-                className={`w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline ${errors.firstName ? "border-red-500" : ""}`}
+                className={`w-full px-3 py-2 leading-tight text-gray-700 dark:text-gray-100 dark:bg-gray-800 border rounded shadow appearance-none focus:outline-none focus:shadow-outline ${errors.firstName ? "border-red-500" : ""}`}
+                aria-invalid={!!errors.firstName}
+                aria-describedby="firstName-error"
               />
-              {errors.firstName && <p className="mt-1 text-xs text-red-500">{errors.firstName}</p>}
+              {errors.firstName && <p id="firstName-error" className="mt-1 text-xs text-red-500">{errors.firstName}</p>}
             </div>
             <div>
-              <label htmlFor="name" className="block mb-2 text-sm font-bold text-gray-700">Nom:</label>
+              <label htmlFor="name" className="flex mb-2 text-sm font-bold text-gray-700 dark:text-gray-200 items-center gap-1"><FaUser /> Nom:</label>
               <input
                 type="text"
                 id="name"
                 value={values.name}
                 onChange={handleChange}
                 placeholder="Votre nom"
-                className={`w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline ${errors.name ? "border-red-500" : ""}`}
+                className={`w-full px-3 py-2 leading-tight text-gray-700 dark:text-gray-100 dark:bg-gray-800 border rounded shadow appearance-none focus:outline-none focus:shadow-outline ${errors.name ? "border-red-500" : ""}`}
+                aria-invalid={!!errors.name}
+                aria-describedby="name-error"
               />
-              {errors.name && <p className="mt-1 text-xs text-red-500">{errors.name}</p>}
+              {errors.name && <p id="name-error" className="mt-1 text-xs text-red-500">{errors.name}</p>}
             </div>
           </div>
           <div>
-            <label htmlFor="email" className="block mb-2 text-sm font-bold text-gray-700">Email:</label>
+            <label htmlFor="email" className="flex mb-2 text-sm font-bold text-gray-700 dark:text-gray-200 items-center gap-1"><FaEnvelope /> Email:</label>
             <input
               type="email"
               id="email"
               value={values.email}
               onChange={handleChange}
               placeholder="Votre email"
-              className={`w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline ${errors.email ? "border-red-500" : ""}`}
+              className={`w-full px-3 py-2 leading-tight text-gray-700 dark:text-gray-100 dark:bg-gray-800 border rounded shadow appearance-none focus:outline-none focus:shadow-outline ${errors.email ? "border-red-500" : ""}`}
+              aria-invalid={!!errors.email}
+              aria-describedby="email-error"
             />
-            {errors.email && <p className="mt-1 text-xs text-red-500">{errors.email}</p>}
+            {errors.email && <p id="email-error" className="mt-1 text-xs text-red-500">{errors.email}</p>}
           </div>
           <div>
-            <label htmlFor="subject" className="block mb-2 text-sm font-bold text-gray-700">Objet:</label>
+            <label htmlFor="subject" className="block mb-2 text-sm font-bold text-gray-700 dark:text-gray-200">Objet:</label>
             <select
               id="subject"
               value={values.subject}
               onChange={handleChange}
-              className={`w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline ${errors.subject ? "border-red-500" : ""}`}
+              className={`w-full px-3 py-2 leading-tight text-gray-700 dark:text-gray-100 dark:bg-gray-800 border rounded shadow appearance-none focus:outline-none focus:shadow-outline ${errors.subject ? "border-red-500" : ""}`}
+              aria-invalid={!!errors.subject}
+              aria-describedby="subject-error"
             >
               <option value="">Sélectionnez un service</option>
               <option value="developpement">Développement web</option>
@@ -118,22 +130,28 @@ export default function ContactForm() {
               <option value="consultation">Consultation</option>
               <option value="autre">Autre</option>
             </select>
-            {errors.subject && <p className="mt-1 text-xs text-red-500">{errors.subject}</p>}
+            {errors.subject && <p id="subject-error" className="mt-1 text-xs text-red-500">{errors.subject}</p>}
           </div>
           <div>
-            <label htmlFor="message" className="block mb-2 text-sm font-bold text-gray-700">Message:</label>
+            <label htmlFor="message" className="block mb-2 text-sm font-bold text-gray-700 dark:text-gray-200">Message:</label>
             <textarea
               id="message"
               value={values.message}
               onChange={handleChange}
               placeholder="Votre message"
-              className={`w-full h-32 px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline ${errors.message ? "border-red-500" : ""}`}
+              className={`w-full h-32 px-3 py-2 leading-tight text-gray-700 dark:text-gray-100 dark:bg-gray-800 border rounded shadow appearance-none focus:outline-none focus:shadow-outline ${errors.message ? "border-red-500" : ""}`}
+              aria-invalid={!!errors.message}
+              aria-describedby="message-error"
             ></textarea>
-            {errors.message && <p className="mt-1 text-xs text-red-500">{errors.message}</p>}
+            {errors.message && <p id="message-error" className="mt-1 text-xs text-red-500">{errors.message}</p>}
           </div>
           <div className="flex items-center justify-between">
-            <button className="px-4 py-2 font-bold text-white bg-teal-500 rounded hover:bg-teal-700 focus:outline-none focus:shadow-outline" type="submit">
-              Envoyer
+            <button
+              className="px-4 py-2 font-bold text-white bg-primary rounded hover:bg-accent focus:outline-none focus:shadow-outline flex items-center gap-2 transition-transform active:scale-95"
+              type="submit"
+              aria-label="Envoyer le message"
+            >
+              <FaCheckCircle className="text-lg" /> Envoyer
             </button>
           </div>
         </form>
