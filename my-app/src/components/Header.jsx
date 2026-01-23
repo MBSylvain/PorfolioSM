@@ -8,7 +8,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 py-6 font-sans shadow-lg bg-gradient-to-r from-[#F5F5F5] to-[#D6D3CD] dark:from-gray-900 dark:to-gray-800 text-[#222222] dark:text-white">
       <div className="container px-4 mx-auto">
         <div className="flex items-center justify-between">
-          <a href="#" className="text-2xl font-bold text-[#333333] dark:text-white transition-colors duration-300 hover:text-[#5A6D7A]">Sylvain MB</a>
+          <button className="text-2xl font-bold text-[#333333] dark:text-white transition-colors duration-300 hover:text-[#5A6D7A]" style={{background: 'none', border: 'none', padding: 0, cursor: 'pointer'}} aria-label="Accueil">Sylvain MB</button>
           <nav className="hidden space-x-8 md:flex" aria-label="Navigation principale">
             <a href="#about" className="transition-colors duration-300 hover:text-[#5A6D7A]">À propos</a>
             <a href="#projects" className="transition-colors duration-300 hover:text-[#5A6D7A]">Projets</a>

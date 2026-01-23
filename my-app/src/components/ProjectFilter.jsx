@@ -40,7 +40,7 @@ const projects = [
   },
   {
     id: 5,
-    title: "Application suiv de note d\éléve",
+    title: "Application suiv de note d'élève",
     tech: "Vite/Postreg- supabase ",
     context: "Professionnel",
     details: "Développement d’une application web de gestion des notes.",
