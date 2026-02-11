@@ -1,13 +1,12 @@
-import React from 'react';
-import Header from './components/Header';
-import Hero from './components/Hero';
-import About from './components/About';
-import ProjectFilter from './components/ProjectFilter';
-import Skills from './components/Skills';
-import Services from './components/Services';
-import ContactForm from './components/ContactForm';
-import Footer from './components/Footer';
-
+import React from "react";
+import Header from "./components/Header";
+import Hero from "./components/Hero";
+import About from "./components/About";
+import ProjectFilter from "./components/ProjectFilter";
+import Skills from "./components/Skills";
+import Services from "./components/Services";
+import ContactForm from "./components/ContactForm";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -27,12 +26,6 @@ function App() {
 
         {/* Projets filtrables */}
         <ProjectFilter />
-
-        {/* Compétences techniques */}
-        <Skills />
-
-        {/* Formulaire de contact */}
-        <ContactForm />
       </main>
 
       {/* Pied de page */}
