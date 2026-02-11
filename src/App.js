@@ -5,6 +5,7 @@ import About from "./components/About";
 import ProjectFilter from "./components/ProjectFilter";
 import Skills from "./components/Skills";
 import Services from "./components/Services";
+import PricingCards from "./components/PricingCards";
 import ContactForm from "./components/ContactForm";
 import Footer from "./components/Footer";
 
@@ -23,6 +24,9 @@ function App() {
 
         {/* Services proposés */}
         <Services />
+
+        {/* Tarifs */}
+        <PricingCards />
 
         {/* Projets filtrables */}
         <ProjectFilter />
