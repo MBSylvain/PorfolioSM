@@ -65,14 +65,14 @@ export default function ContactForm() {
     };
 
     return (
-      <section id="contact" className="px-6 py-16 bg-white dark:bg-gray-900 font-sans">
-        <h2 className="mb-4 text-3xl font-semibold text-center text-gray-900 dark:text-white flex items-center justify-center gap-2">
-          <FaRegCommentDots className="text-primary text-2xl" /> Contact
+      <section id="contact" className="px-6 py-16 font-sans bg-white dark:bg-gray-900">
+        <h2 className="flex items-center justify-center gap-2 mb-4 text-3xl font-semibold text-center text-gray-900 dark:text-white">
+          <FaRegCommentDots className="text-2xl text-primary" /> Contact
         </h2>
         <form className="max-w-lg mx-auto space-y-6" onSubmit={handleSubmit} noValidate>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <div>
-              <label htmlFor="firstName" className="flex mb-2 text-sm font-bold text-gray-700 dark:text-gray-200 items-center gap-1"><FaUser /> Prénom:</label>
+              <label htmlFor="firstName" className="flex items-center gap-1 mb-2 text-sm font-bold text-gray-700 dark:text-gray-200"><FaUser /> Prénom:</label>
               <input
                 type="text"
                 id="firstName"
@@ -86,7 +86,7 @@ export default function ContactForm() {
               {errors.firstName && <p id="firstName-error" className="mt-1 text-xs text-red-500">{errors.firstName}</p>}
             </div>
             <div>
-              <label htmlFor="name" className="flex mb-2 text-sm font-bold text-gray-700 dark:text-gray-200 items-center gap-1"><FaUser /> Nom:</label>
+              <label htmlFor="name" className="flex items-center gap-1 mb-2 text-sm font-bold text-gray-700 dark:text-gray-200"><FaUser /> Nom:</label>
               <input
                 type="text"
                 id="name"
@@ -101,7 +101,7 @@ export default function ContactForm() {
             </div>
           </div>
           <div>
-            <label htmlFor="email" className="flex mb-2 text-sm font-bold text-gray-700 dark:text-gray-200 items-center gap-1"><FaEnvelope /> Email:</label>
+            <label htmlFor="email" className="flex items-center gap-1 mb-2 text-sm font-bold text-gray-700 dark:text-gray-200"><FaEnvelope /> Email:</label>
             <input
               type="email"
               id="email"
@@ -147,7 +147,7 @@ export default function ContactForm() {
           </div>
           <div className="flex items-center justify-between">
             <button
-              className="px-4 py-2 font-bold text-white bg-primary rounded hover:bg-accent focus:outline-none focus:shadow-outline flex items-center gap-2 transition-transform active:scale-95"
+              className="flex items-center gap-2 px-4 py-2 font-bold text-white transition-transform bg-gray-700 rounded hover:bg-gray-800 focus:outline-none focus:shadow-outline active:scale-95"
               type="submit"
               aria-label="Envoyer le message"
             >

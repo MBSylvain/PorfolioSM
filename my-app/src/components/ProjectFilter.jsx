@@ -41,9 +41,9 @@ const projects = [
   {
     id: 5,
     title: "Application suiv de note d'élève",
-    tech: "Vite/Postreg- supabase ",
+    tech: "Supabase (PostgreSQL, API REST sécurisée),Google Apps Script (pour Google Sheets) VBA (pour Excel)React (pour le guide utilisateur et la documentation interactive)Tailwind CSS (pour le frontend)",
     context: "Professionnel",
-    details: "Développement d’une application web de gestion des notes.",
+    details: "Ce projet permet de synchroniser automatiquement des données entre des fichiers Excel ou Google Sheets et une base de données Supabase. ",
     liens: "https://brique-lemon.vercel.app/",
   },
   {
@@ -80,7 +80,7 @@ export default function ProjectFilter() {
               <button
                 key={tech}
                 onClick={() => setFilter(tech)}
-                className={`px-4 py-2 rounded font-semibold transition-colors duration-200 shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${filter === tech ? "bg-primary text-white scale-105" : "bg-gray-200 dark:bg-gray-700 dark:text-gray-100 hover:bg-primary/80 hover:text-white"}`}
+                className={`px-4 py-2 rounded font-semibold transition-colors duration-200 shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${filter === tech ? "bg-gray-700 text-white scale-105" : "bg-gray-200 dark:bg-gray-700 dark:text-gray-100 hover:bg-gray-700/80 hover:text-white"}`}
               >
                 {tech}
               </button>

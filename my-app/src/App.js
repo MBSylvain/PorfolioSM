@@ -22,14 +22,14 @@ function App() {
         {/* À propos */}
         <About />
 
+        {/* Services proposés */}
+        <Services />
+
         {/* Projets filtrables */}
         <ProjectFilter />
 
         {/* Compétences techniques */}
         <Skills />
-
-        {/* Services proposés */}
-        <Services />
 
         {/* Formulaire de contact */}
         <ContactForm />
