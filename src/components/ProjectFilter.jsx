@@ -43,7 +43,8 @@ const projects = [
     title: "Application suiv de note d'élève",
     tech: "Supabase (PostgreSQL, API REST sécurisée),Google Apps Script (pour Google Sheets) VBA (pour Excel)React (pour le guide utilisateur et la documentation interactive)Tailwind CSS (pour le frontend)",
     context: "Professionnel",
-    details: "Ce projet permet de synchroniser automatiquement des données entre des fichiers Excel ou Google Sheets et une base de données Supabase. ",
+    details:
+      "Ce projet permet de synchroniser automatiquement des données entre des fichiers Excel ou Google Sheets et une base de données Supabase. ",
     liens: "https://brique-lemon.vercel.app/",
   },
   {
@@ -62,7 +63,7 @@ export default function ProjectFilter() {
     filter === "All" ? projects : projects.filter((p) => p.context === filter);
 
   return (
-    <div className="">
+    <div className="bg-white">
       <motion.section
         id="projects"
         className="px-6 py-16 bg-gray-50 dark:bg-gray-900"

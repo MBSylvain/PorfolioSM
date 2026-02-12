@@ -1,7 +1,7 @@
 // ProjectCard.jsx
-import React from 'react';
-import { FaExternalLinkAlt } from 'react-icons/fa';
-import { motion } from 'framer-motion';
+import React from "react";
+import { FaExternalLinkAlt } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 export default function ProjectCard({ title, tech, details, context, liens }) {
   return (
@@ -10,12 +10,18 @@ export default function ProjectCard({ title, tech, details, context, liens }) {
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.5, ease: 'easeOut' }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
     >
-      <h3 className="mb-2 text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary transition-colors">{title}</h3>
+      <h3 className="mb-2 text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary transition-colors">
+        {title}
+      </h3>
       <p className="text-gray-600 dark:text-gray-300">Technologie : {tech}</p>
-      <p className="mt-2 text-gray-700 dark:text-gray-200">Description du projet : {details}</p>
-      <p className="mt-2 text-gray-700 dark:text-gray-200">Contexte : {context}</p>
+      <p className="mt-2 text-gray-700 dark:text-gray-200">
+        Description du projet : {details}
+      </p>
+      <p className="mt-2 text-gray-700 dark:text-gray-200">
+        Contexte : {context}
+      </p>
       <a
         href={liens}
         target="_blank"
