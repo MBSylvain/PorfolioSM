@@ -55,6 +55,16 @@ const projects = [
     details: "Création d’un site pour le suivi des candidatures.",
     liens: "https://suivi-alpha.vercel.app/",
   },
+
+  {
+    id: 7,
+    title: "Commandes Fournisseurs",
+    tech: "No Code – Power Apps / Power Automate",
+    context: "Professionnel",
+    details:
+      "Application Power Apps développée dans un contexte interne d’entreprise pour les conducteurs de travaux et la direction. Objectif : fiabiliser et structurer le processus de commande.",
+    liens: "",
+  },
 ];
 
 export default function ProjectFilter() {
