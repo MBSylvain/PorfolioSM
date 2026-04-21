@@ -11,28 +11,21 @@ import Footer from "./components/Footer";
 
 function App() {
   return (
-    <div className="font-sans bg-gray-50 text-gray-800 scroll-smooth">
-      {/* Barre de navigation */}
+    <div className="font-sans bg-softBlack text-white/90 selection:bg-primary selection:text-white scroll-smooth min-h-screen flex flex-col">
+      {/* Noise Texture Overlay for global cohesion */}
+      <div className="fixed inset-0 z-0 opacity-[0.02] pointer-events-none" 
+           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}></div>
+      
       <Header />
 
-      {/* Section d’introduction */}
-      <main>
+      <main className="flex-grow relative z-10">
         <Hero />
-
-        {/* À propos */}
         <About />
-
-        {/* Services proposés */}
         <Services />
-
-        {/* Tarifs */}
         <PricingCards />
-
-        {/* Projets filtrables */}
         <ProjectFilter />
       </main>
 
-      {/* Pied de page */}
       <Footer />
     </div>
   );

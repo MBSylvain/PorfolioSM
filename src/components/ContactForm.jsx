@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import {
   FaUser,
   FaEnvelope,
-  FaRegCommentDots,
   FaCheckCircle,
+  FaPaperPlane,
 } from "react-icons/fa";
 
 export default function ContactForm() {
@@ -25,23 +25,15 @@ export default function ContactForm() {
 
   const validate = (values) => {
     const errors = {};
-    if (!values.firstName.trim()) {
-      errors.firstName = "Le prénom est requis.";
-    }
-    if (!values.name.trim()) {
-      errors.name = "Le nom est requis.";
-    }
+    if (!values.firstName.trim()) errors.firstName = "Requis";
+    if (!values.name.trim()) errors.name = "Requis";
     if (!values.email.trim()) {
-      errors.email = "L'email est requis.";
+      errors.email = "Requis";
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-      errors.email = "Format d'email invalide.";
+      errors.email = "Format invalide";
     }
-    if (!values.subject) {
-      errors.subject = "Veuillez sélectionner un service.";
-    }
-    if (!values.message.trim()) {
-      errors.message = "Le message est requis.";
-    }
+    if (!values.subject) errors.subject = "Sélectionnez un service";
+    if (!values.message.trim()) errors.message = "Message requis";
     return errors;
   };
 
@@ -60,168 +52,107 @@ export default function ContactForm() {
     const validationErrors = validate(values);
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length === 0) {
-      // Traitement du formulaire ici
       setSubmitted(true);
       setValues(initialState);
-      setTimeout(() => setSubmitted(false), 3500);
+      setTimeout(() => setSubmitted(false), 5000);
     }
   };
 
   return (
-    <section
-      id="contact"
-      className="px-6 py-16 font-sans bg-white dark:bg-gray-900"
-    >
-      <h2 className="flex items-center justify-center gap-2 mb-6 text-3xl font-semibold text-center text-gray-900 dark:text-white">
-        <FaRegCommentDots className="text-2xl text-primary" /> Contact
-      </h2>
-
-      <form
-        className="max-w-2xl mx-auto p-6 bg-gray-50 rounded-lg shadow-sm dark:bg-gray-800"
-        onSubmit={handleSubmit}
-        noValidate
-      >
-        {submitted && (
-          <div className="flex items-center gap-2 px-4 py-3 mb-4 text-sm text-green-800 bg-green-100 rounded">
-            <FaCheckCircle className="text-lg" />
-            <span>Merci — votre message a bien été envoyé.</span>
+    <div className="w-full">
+      {submitted ? (
+        <div className="flex flex-col items-center justify-center py-12 text-center">
+          <div className="w-20 h-20 bg-primary/20 text-primary rounded-full flex items-center justify-center text-4xl mb-6 animate-bounce">
+            <FaCheckCircle />
           </div>
-        )}
+          <h3 className="text-2xl font-bold text-white mb-2">Message envoyé !</h3>
+          <p className="text-white/50">Merci, je reviendrai vers vous dans les plus brefs délais.</p>
+        </div>
+      ) : (
+        <form onSubmit={handleSubmit} noValidate className="space-y-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <div className="space-y-2">
+              <label htmlFor="firstName" className="text-[10px] uppercase tracking-widest font-bold text-white/40 flex items-center gap-2">
+                <FaUser className="text-primary" /> Prénom
+              </label>
+              <input
+                type="text"
+                id="firstName"
+                value={values.firstName}
+                onChange={handleChange}
+                placeholder="Ex: Sylvain"
+                className={`w-full px-5 py-4 bg-white/5 border rounded-2xl text-white placeholder-white/20 transition-all focus:outline-none focus:ring-2 focus:ring-primary/50 ${errors.firstName ? "border-red-500/50" : "border-white/10"}`}
+              />
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="name" className="text-[10px] uppercase tracking-widest font-bold text-white/40 flex items-center gap-2">
+                <FaUser className="text-primary" /> Nom
+              </label>
+              <input
+                type="text"
+                id="name"
+                value={values.name}
+                onChange={handleChange}
+                placeholder="Ex: Mbeumou"
+                className={`w-full px-5 py-4 bg-white/5 border rounded-2xl text-white placeholder-white/20 transition-all focus:outline-none focus:ring-2 focus:ring-primary/50 ${errors.name ? "border-red-500/50" : "border-white/10"}`}
+              />
+            </div>
+          </div>
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          <div>
-            <label
-              htmlFor="firstName"
-              className="mb-2 text-xs font-semibold tracking-wide text-gray-600 dark:text-gray-300 flex items-center gap-2"
-            >
-              <FaUser /> Prénom
+          <div className="space-y-2">
+            <label htmlFor="email" className="text-[10px] uppercase tracking-widest font-bold text-white/40 flex items-center gap-2">
+              <FaEnvelope className="text-primary" /> Adresse Email
             </label>
             <input
-              type="text"
-              id="firstName"
-              value={values.firstName}
+              type="email"
+              id="email"
+              value={values.email}
               onChange={handleChange}
-              placeholder="Votre prénom"
-              className={`w-full px-4 py-2 text-gray-800 bg-white border rounded-lg shadow-sm placeholder-gray-400 transition focus:outline-none focus:ring-2 focus:ring-indigo-400 ${errors.firstName ? "border-red-500" : "border-gray-200"}`}
-              aria-invalid={!!errors.firstName}
-              aria-describedby="firstName-error"
+              placeholder="votre@email.com"
+              className={`w-full px-5 py-4 bg-white/5 border rounded-2xl text-white placeholder-white/20 transition-all focus:outline-none focus:ring-2 focus:ring-primary/50 ${errors.email ? "border-red-500/50" : "border-white/10"}`}
             />
-            {errors.firstName && (
-              <p id="firstName-error" className="mt-1 text-xs text-red-500">
-                {errors.firstName}
-              </p>
-            )}
           </div>
-          <div>
-            <label
-              htmlFor="name"
-              className="mb-2 text-xs font-semibold tracking-wide text-gray-600 dark:text-gray-300 flex items-center gap-2"
-            >
-              <FaUser /> Nom
+
+          <div className="space-y-2">
+            <label htmlFor="subject" className="text-[10px] uppercase tracking-widest font-bold text-white/40">
+              Objet de la demande
             </label>
-            <input
-              type="text"
-              id="name"
-              value={values.name}
+            <select
+              id="subject"
+              value={values.subject}
               onChange={handleChange}
-              placeholder="Votre nom"
-              className={`w-full px-4 py-2 text-gray-800 bg-white border rounded-lg shadow-sm placeholder-gray-400 transition focus:outline-none focus:ring-2 focus:ring-indigo-400 ${errors.name ? "border-red-500" : "border-gray-200"}`}
-              aria-invalid={!!errors.name}
-              aria-describedby="name-error"
-            />
-            {errors.name && (
-              <p id="name-error" className="mt-1 text-xs text-red-500">
-                {errors.name}
-              </p>
-            )}
+              className={`w-full px-5 py-4 bg-white/5 border rounded-2xl text-white appearance-none transition-all focus:outline-none focus:ring-2 focus:ring-primary/50 ${errors.subject ? "border-red-500/50" : "border-white/10"}`}
+            >
+              <option value="" className="bg-softBlack text-white">Sélectionnez un service</option>
+              <option value="vitrine" className="bg-softBlack text-white">Site Vitrine</option>
+              <option value="developpement" className="bg-softBlack text-white">Application Web (SaaS, Portal)</option>
+              <option value="maintenance" className="bg-softBlack text-white">Maintenance / Refonte</option>
+              <option value="autre" className="bg-softBlack text-white">Autre demande</option>
+            </select>
           </div>
-        </div>
 
-        <div className="mt-4">
-          <label
-            htmlFor="email"
-            className="mb-2 text-xs font-semibold tracking-wide text-gray-600 dark:text-gray-300 flex items-center gap-2"
-          >
-            <FaEnvelope /> Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            value={values.email}
-            onChange={handleChange}
-            placeholder="Votre email"
-            className={`w-full px-4 py-2 text-gray-800 bg-white border rounded-lg shadow-sm placeholder-gray-400 transition focus:outline-none focus:ring-2 focus:ring-indigo-400 ${errors.email ? "border-red-500" : "border-gray-200"}`}
-            aria-invalid={!!errors.email}
-            aria-describedby="email-error"
-          />
-          {errors.email && (
-            <p id="email-error" className="mt-1 text-xs text-red-500">
-              {errors.email}
-            </p>
-          )}
-        </div>
+          <div className="space-y-2">
+            <label htmlFor="message" className="text-[10px] uppercase tracking-widest font-bold text-white/40">
+              Votre Message
+            </label>
+            <textarea
+              id="message"
+              value={values.message}
+              onChange={handleChange}
+              placeholder="Dites-moi en plus sur votre projet..."
+              className={`w-full h-40 px-5 py-4 bg-white/5 border rounded-2xl text-white placeholder-white/20 transition-all focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none ${errors.message ? "border-red-500/50" : "border-white/10"}`}
+            />
+          </div>
 
-        <div className="mt-4">
-          <label
-            htmlFor="subject"
-            className="mb-2 text-xs font-semibold tracking-wide text-gray-600 dark:text-gray-300"
-          >
-            Objet
-          </label>
-          <select
-            id="subject"
-            value={values.subject}
-            onChange={handleChange}
-            className={`w-full px-4 py-2 text-gray-800 bg-white border rounded-lg shadow-sm transition focus:outline-none focus:ring-2 focus:ring-indigo-400 ${errors.subject ? "border-red-500" : "border-gray-200"}`}
-            aria-invalid={!!errors.subject}
-            aria-describedby="subject-error"
-          >
-            <option value="">Sélectionnez un service</option>
-            <option value="developpement">Développement web</option>
-            <option value="design">Design UI/UX</option>
-            <option value="consultation">Consultation</option>
-            <option value="autre">Autre</option>
-          </select>
-          {errors.subject && (
-            <p id="subject-error" className="mt-1 text-xs text-red-500">
-              {errors.subject}
-            </p>
-          )}
-        </div>
-
-        <div className="mt-4">
-          <label
-            htmlFor="message"
-            className="mb-2 text-xs font-semibold tracking-wide text-gray-600 dark:text-gray-300"
-          >
-            Message
-          </label>
-          <textarea
-            id="message"
-            value={values.message}
-            onChange={handleChange}
-            placeholder="Votre message"
-            className={`w-full h-36 px-4 py-3 text-gray-800 bg-white border rounded-lg shadow-sm placeholder-gray-400 transition focus:outline-none focus:ring-2 focus:ring-indigo-400 ${errors.message ? "border-red-500" : "border-gray-200"}`}
-            aria-invalid={!!errors.message}
-            aria-describedby="message-error"
-          ></textarea>
-          {errors.message && (
-            <p id="message-error" className="mt-1 text-xs text-red-500">
-              {errors.message}
-            </p>
-          )}
-        </div>
-
-        <div className="flex items-center justify-between mt-6">
           <button
-            className="w-full flex items-center justify-center gap-2 px-4 py-3 font-semibold text-white transition-transform bg-gradient-to-r from-indigo-600 to-indigo-500 rounded-lg hover:from-indigo-700 active:scale-95"
             type="submit"
-            aria-label="Envoyer le message"
+            className="w-full flex items-center justify-center gap-3 py-5 bg-primary text-softBlack font-extrabold rounded-2xl hover:scale-[1.02] active:scale-95 transition-all shadow-[0_20px_40px_-15px_rgba(20,184,166,0.3)]"
           >
-            <FaCheckCircle className="text-lg" /> Envoyer
+            <FaPaperPlane /> Envoyer le message
           </button>
-        </div>
-      </form>
-    </section>
+        </form>
+      )}
+    </div>
   );
 }
+

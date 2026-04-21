@@ -1,7 +1,6 @@
-// ProjectFilter.jsx
 import React, { useState } from "react";
 import ProjectCard from "./ProjectCard.jsx";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const projects = [
   {
@@ -22,47 +21,42 @@ const projects = [
   },
   {
     id: 3,
-    title: "Site vitrine de création de site web",
-    tech: "React-Js/Tailwind css/SQL",
+    title: "Services Web Vitrine",
+    tech: "React-Js / Tailwind / SQL",
     context: "Personnel",
-    details:
-      "Création de sites web “clé en main” pour artisans, PME et TPE du bâtiment.",
+    details: "Offre de services web clé en main pour artisans et PME du bâtiment.",
     liens: "https://keen-frangipane-a2a348.netlify.app/",
   },
   {
     id: 4,
-    title: "Covoiturage écologique",
-    tech: "React JS/PHP/Tailwind CSS",
+    title: "Ecoride — Covoiturage",
+    tech: "React / PHP / Tailwind",
     context: "Formation",
-    details:
-      "Développement d’une application web pour le covoiturage écologique.",
+    details: "Plateforme de covoiturage écologique avec gestion de trajets.",
     liens: "https://ecoride-hazel.vercel.app/",
   },
   {
     id: 5,
-    title: "Application suiv de note d'élève",
-    tech: "Supabase (PostgreSQL, API REST sécurisée),Google Apps Script (pour Google Sheets) VBA (pour Excel)React (pour le guide utilisateur et la documentation interactive)Tailwind CSS (pour le frontend)",
+    title: "SyncSheet Pro",
+    tech: "Supabase / Apps Script / React",
     context: "Professionnel",
-    details:
-      "Ce projet permet de synchroniser automatiquement des données entre des fichiers Excel ou Google Sheets et une base de données Supabase. ",
+    details: "Synchronisation automatique entre Supabase et Excel/Google Sheets.",
     liens: "https://brique-lemon.vercel.app/",
   },
   {
     id: 6,
-    title: "Suivi de candidature",
-    tech: "Vite/Postreg Supabase",
+    title: "Suivi Candidat Alpha",
+    tech: "Vite / Supabase / PostgreSQL",
     context: "Personnel",
-    details: "Création d’un site pour le suivi des candidatures.",
+    details: "Tableau de bord personnalisé pour le suivi des candidatures.",
     liens: "https://suivi-alpha.vercel.app/",
   },
-
   {
     id: 7,
     title: "Commandes Fournisseurs",
-    tech: "No Code – Power Apps / Power Automate",
+    tech: "Power Apps / Power Automate",
     context: "Professionnel",
-    details:
-      "Application Power Apps développée dans un contexte interne d’entreprise pour les conducteurs de travaux et la direction. Objectif : fiabiliser et structurer le processus de commande.",
+    details: "Application interne pour fiabiliser et structurer le processus de commande des conducteurs de travaux.",
     liens: "",
   },
 ];
@@ -72,45 +66,64 @@ export default function ProjectFilter() {
   const filtered =
     filter === "All" ? projects : projects.filter((p) => p.context === filter);
 
+  const categories = ["All", "Formation", "Personnel", "Professionnel"];
+
   return (
-    <div className="bg-white">
-      <motion.section
-        id="projects"
-        className="px-6 py-16 bg-gray-50 dark:bg-gray-900"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.7 }}
-      >
-        <h2 className="mb-6 text-3xl font-semibold text-center text-gray-900 dark:text-white">
-          Mes projets
-        </h2>
-        <div className="flex justify-center gap-4 mb-6">
-          {["All", "Formation", "Personnel", "Professionnel", "Autres"].map(
-            (tech) => (
+    <section id="projects" className="px-6 py-32 bg-softBlack overflow-hidden">
+      <div className="max-w-6xl mx-auto">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-sm uppercase tracking-[0.4em] text-secondary font-bold mb-4">Portfolio</h2>
+          <h3 className="text-4xl md:text-5xl font-extrabold text-white">Sélection de <br/><span className="text-white/40">réalisations.</span></h3>
+        </motion.div>
+
+        {/* Filter Tabs */}
+        <div className="flex flex-wrap justify-center gap-2 mb-16">
+          <div className="flex p-1 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl">
+            {categories.map((cat) => (
               <button
-                key={tech}
-                onClick={() => setFilter(tech)}
-                className={`px-4 py-2 rounded font-semibold transition-colors duration-200 shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${filter === tech ? "bg-gray-700 text-white scale-105" : "bg-gray-200 dark:bg-gray-700 dark:text-gray-100 hover:bg-gray-700/80 hover:text-white"}`}
+                key={cat}
+                onClick={() => setFilter(cat)}
+                className={`relative px-6 py-2.5 text-xs font-semibold uppercase tracking-wider rounded-xl transition-all duration-300 ${
+                  filter === cat ? "text-softBlack" : "text-white/50 hover:text-white"
+                }`}
               >
-                {tech}
+                <span className="relative z-10">{cat === "All" ? "Tous" : cat}</span>
+                {filter === cat && (
+                  <motion.div 
+                    layoutId="activeTab"
+                    className="absolute inset-x-0 inset-y-0 bg-white rounded-[10px] shadow-lg"
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                  />
+                )}
               </button>
-            ),
-          )}
+            ))}
+          </div>
         </div>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          {filtered.map((project) => (
-            <ProjectCard
-              key={project.id}
-              title={project.title}
-              tech={project.tech}
-              details={project.details}
-              context={project.context}
-              liens={project.liens}
-            />
-          ))}
-        </div>
-      </motion.section>
-    </div>
+
+        {/* Projects Grid */}
+        <motion.div 
+          layout
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          <AnimatePresence mode="popLayout">
+            {filtered.map((project) => (
+              <ProjectCard
+                key={project.id}
+                title={project.title}
+                tech={project.tech}
+                details={project.details}
+                context={project.context}
+                liens={project.liens}
+              />
+            ))}
+          </AnimatePresence>
+        </motion.div>
+      </div>
+    </section>
   );
 }

@@ -1,111 +1,107 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { FaBars, FaTimes } from "react-icons/fa";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const openContact = () => {
     window.dispatchEvent(new CustomEvent("openContactModal"));
   };
+
+  const navLinks = [
+    { name: "À propos", href: "#about" },
+    { name: "Services", href: "#services" },
+    { name: "Projets", href: "#projects" },
+  ];
+
   return (
-    <header className="sticky top-0 z-50 py-6 font-sans shadow-lg bg-gradient-to-r from-[#F5F5F5]/50 to-[#D6D3CD]/50 dark:from-gray-900/50 dark:to-gray-800/50 text-[#222222] dark:text-white backdrop-blur-md">
-      <div className="container px-4 mx-auto">
-        <div className="flex items-center justify-between">
+    <header 
+      className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-500 px-6 py-4 mr-0 font-sans`}
+    >
+      <div 
+        className={`max-w-6xl mx-auto flex items-center justify-between px-6 py-3 rounded-2xl transition-all duration-500 border ${
+          scrolled 
+            ? "bg-softBlack/70 backdrop-blur-xl border-white/10 shadow-2xl" 
+            : "bg-transparent border-transparent"
+        }`}
+      >
+        <a
+          href="/"
+          className="text-xl font-extrabold text-white tracking-tighter"
+          aria-label="Accueil"
+        >
+          Sylvain <span className="text-primary">MB</span>
+        </a>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center gap-8">
+          {navLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              className="text-sm font-medium text-white/70 hover:text-white transition-colors"
+            >
+              {link.name}
+            </a>
+          ))}
           <button
-            className="text-2xl font-bold text-[#333333] dark:text-white transition-colors duration-300 hover:text-[#5A6D7A]"
-            style={{
-              background: "none",
-              border: "none",
-              padding: 0,
-              cursor: "pointer",
-            }}
-            aria-label="Accueil"
+            onClick={openContact}
+            className="px-5 py-2 text-sm font-semibold text-softBlack bg-white rounded-xl hover:scale-105 active:scale-95 transition-all"
           >
-            Sylvain MB
+            Contact
           </button>
-          <nav
-            className="hidden space-x-8 md:flex"
-            aria-label="Navigation principale"
-          >
-            <a
-              href="#about"
-              className="transition-colors duration-300 hover:text-[#5A6D7A]"
-            >
-              À propos
-            </a>
-            <a
-              href="#projects"
-              className="transition-colors duration-300 hover:text-[#5A6D7A]"
-            >
-              Projets
-            </a>
-            <a
-              href="#services"
-              className="transition-colors duration-300 hover:text-[#5A6D7A]"
-            >
-              Services
-            </a>
-            <button
-              type="button"
-              onClick={openContact}
-              className="transition-colors duration-300 hover:text-[#5A6D7A]"
-            >
-              Contact
-            </button>
-          </nav>
-          {/* Menu burger mobile */}
-          <button
-            className="p-2 rounded md:hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-            aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            {menuOpen ? (
-              <FaTimes className="w-6 h-6" />
-            ) : (
-              <FaBars className="w-6 h-6" />
-            )}
-          </button>
-        </div>
-        {/* Menu mobile */}
+        </nav>
+
+        {/* Mobile Toggle */}
+        <button
+          className="p-2 text-white/70 hover:text-white md:hidden transition-colors"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+        >
+          {menuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
+        </button>
+      </div>
+
+      {/* Mobile Navigation Panel */}
+      <AnimatePresence>
         {menuOpen && (
-          <nav
-            className="flex flex-col items-center py-4 mt-4 space-y-4 bg-white rounded shadow-lg md:hidden dark:bg-gray-900"
-            aria-label="Navigation mobile"
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="absolute top-24 left-6 right-6 bg-softBlack/95 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 shadow-2xl flex flex-col items-center gap-6 md:hidden"
           >
-            <a
-              href="#about"
-              className="transition-colors duration-300 hover:text-[#5A6D7A]"
-              onClick={() => setMenuOpen(false)}
-            >
-              À propos
-            </a>
-            <a
-              href="#projects"
-              className="transition-colors duration-300 hover:text-[#5A6D7A]"
-              onClick={() => setMenuOpen(false)}
-            >
-              Projets
-            </a>
-            <a
-              href="#services"
-              className="transition-colors duration-300 hover:text-[#5A6D7A]"
-              onClick={() => setMenuOpen(false)}
-            >
-              Services
-            </a>
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                className="text-lg font-medium text-white/70 hover:text-white"
+                onClick={() => setMenuOpen(false)}
+              >
+                {link.name}
+              </a>
+            ))}
             <button
-              type="button"
-              className="transition-colors duration-300 hover:text-[#5A6D7A]"
               onClick={() => {
                 setMenuOpen(false);
                 openContact();
               }}
+              className="w-full py-4 text-softBlack bg-white font-bold rounded-2xl"
             >
               Contact
             </button>
-          </nav>
+          </motion.div>
         )}
-      </div>
+      </AnimatePresence>
     </header>
   );
 }
+
