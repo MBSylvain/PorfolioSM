@@ -4,6 +4,8 @@ import {
   FaEnvelope,
   FaCheckCircle,
   FaPaperPlane,
+  FaExclamationTriangle,
+  FaSpinner,
 } from "react-icons/fa";
 
 export default function ContactForm() {
@@ -23,53 +25,84 @@ export default function ContactForm() {
     message: "",
   };
 
-  const validate = (values) => {
-    const errors = {};
-    if (!values.firstName.trim()) errors.firstName = "Requis";
-    if (!values.name.trim()) errors.name = "Requis";
-    if (!values.email.trim()) {
-      errors.email = "Requis";
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-      errors.email = "Format invalide";
-    }
-    if (!values.subject) errors.subject = "Sélectionnez un service";
-    if (!values.message.trim()) errors.message = "Message requis";
-    return errors;
-  };
-
   const [values, setValues] = useState(initialState);
   const [errors, setErrors] = useState(initialErrors);
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState("idle"); // idle, loading, success, error
+
+  const validate = (vals) => {
+    const errs = {};
+    if (!vals.firstName.trim()) errs.firstName = "Requis";
+    if (!vals.name.trim()) errs.name = "Requis";
+    if (!vals.email.trim()) {
+      errs.email = "Requis";
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(vals.email)) {
+      errs.email = "Format invalide";
+    }
+    if (!vals.subject) errs.subject = "Sélectionnez un service";
+    if (!vals.message.trim()) errs.message = "Message requis";
+    return errs;
+  };
 
   const handleChange = (e) => {
     const { id, value } = e.target;
     setValues((prev) => ({ ...prev, [id]: value }));
     setErrors((prev) => ({ ...prev, [id]: "" }));
+    if (status === "error") setStatus("idle");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validate(values);
     setErrors(validationErrors);
+
     if (Object.keys(validationErrors).length === 0) {
-      setSubmitted(true);
-      setValues(initialState);
-      setTimeout(() => setSubmitted(false), 5000);
+      setStatus("loading");
+      try {
+        const response = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(values),
+        });
+
+        if (response.ok) {
+          setStatus("success");
+          setValues(initialState);
+          setTimeout(() => setStatus("idle"), 6000);
+        } else {
+          setStatus("error");
+        }
+      } catch (err) {
+        console.error("Submission error:", err);
+        setStatus("error");
+      }
     }
   };
 
   return (
     <div className="w-full">
-      {submitted ? (
+      {status === "success" ? (
         <div className="flex flex-col items-center justify-center py-12 text-center">
           <div className="w-20 h-20 bg-primary/20 text-primary rounded-full flex items-center justify-center text-4xl mb-6 animate-bounce">
             <FaCheckCircle />
           </div>
           <h3 className="text-2xl font-bold text-white mb-2">Message envoyé !</h3>
           <p className="text-white/50">Merci, je reviendrai vers vous dans les plus brefs délais.</p>
+          <button 
+            onClick={() => setStatus("idle")}
+            className="mt-8 text-xs text-primary underline hover:text-white transition-colors"
+          >
+            Envoyer un autre message
+          </button>
         </div>
       ) : (
         <form onSubmit={handleSubmit} noValidate className="space-y-6">
+          {status === "error" && (
+            <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-2xl flex items-center gap-3 text-red-500 text-sm">
+              <FaExclamationTriangle />
+              <span>Oups ! Une erreur est survenue. Veuillez réessayer plus tard.</span>
+            </div>
+          )}
+
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <div className="space-y-2">
               <label htmlFor="firstName" className="text-[10px] uppercase tracking-widest font-bold text-white/40 flex items-center gap-2">
@@ -146,13 +179,23 @@ export default function ContactForm() {
 
           <button
             type="submit"
-            className="w-full flex items-center justify-center gap-3 py-5 bg-primary text-softBlack font-extrabold rounded-2xl hover:scale-[1.02] active:scale-95 transition-all shadow-[0_20px_40px_-15px_rgba(20,184,166,0.3)]"
+            disabled={status === "loading"}
+            className="w-full flex items-center justify-center gap-3 py-5 bg-primary text-softBlack font-extrabold rounded-2xl hover:scale-[1.02] active:scale-95 transition-all shadow-[0_20px_40px_-15px_rgba(20,184,166,0.3)] disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            <FaPaperPlane /> Envoyer le message
+            {status === "loading" ? (
+              <>
+                <FaSpinner className="animate-spin" /> Envoi en cours...
+              </>
+            ) : (
+              <>
+                <FaPaperPlane /> Envoyer le message
+              </>
+            )}
           </button>
         </form>
       )}
     </div>
   );
 }
+
 
