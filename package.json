@@ -855,7 +855,7 @@
   "bugs": {
     "url": "https://github.com/MBSylvain/PorfolioSM/issues"
   },
-  "homepage": ".",
+  "homepage": "/",
   "browserslist": {
     "production": [
       ">0.2%",
