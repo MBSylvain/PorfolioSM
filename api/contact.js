@@ -1,9 +1,10 @@
-const { Resend } = require('resend');
+import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-module.exports = async (req, res) => {
-  // CORS check (Vercel handles this mostly but let's be explicit if needed)
+export default async function handler(req, res) {
+  console.log(`[API] ${req.method} request received`);
+
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }
@@ -12,15 +13,15 @@ module.exports = async (req, res) => {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { firstName, name, email, subject, message } = req.body;
-
-  if (!email || !message) {
-    return res.status(400).json({ error: 'Email and message are required' });
-  }
-
   try {
+    const { firstName, name, email, subject, message } = req.body;
+
+    if (!email || !message) {
+      return res.status(400).json({ error: 'Email and message are required' });
+    }
+
     const { data, error } = await resend.emails.send({
-      from: 'Portfolio <onboarding@resend.dev>',
+      from: 'Portfolio SM <onboarding@resend.dev>',
       to: ['sylvain.mbeumou@gmail.com'],
       reply_to: email,
       subject: `[Portfolio SM] ${subject || 'Nouveau contact'}`,
@@ -36,11 +37,14 @@ module.exports = async (req, res) => {
     });
 
     if (error) {
+      console.error('[API] Resend error:', error);
       return res.status(400).json({ error });
     }
 
+    console.log('[API] Email sent successfully');
     return res.status(200).json({ success: true, data });
   } catch (err) {
+    console.error('[API] Server error:', err);
     return res.status(500).json({ error: err.message });
   }
-};
+}
