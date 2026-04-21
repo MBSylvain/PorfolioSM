@@ -1,8 +1,8 @@
-import { Resend } from 'resend';
+const { Resend } = require('resend');
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export default async function handler(req, res) {
+module.exports = async (req, res) => {
   console.log(`[API] ${req.method} request received`);
 
   if (req.method === 'OPTIONS') {
@@ -47,4 +47,4 @@ export default async function handler(req, res) {
     console.error('[API] Server error:', err);
     return res.status(500).json({ error: err.message });
   }
-}
+};
