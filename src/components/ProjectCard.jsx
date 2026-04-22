@@ -2,7 +2,7 @@ import React from 'react';
 import { FaArrowRight } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
-export default function ProjectCard({ title, tech, details, context, liens }) {
+export default function ProjectCard({ title, tech, details, context, liens, image }) {
   return (
     <motion.div
       layout
@@ -12,9 +12,22 @@ export default function ProjectCard({ title, tech, details, context, liens }) {
       transition={{ duration: 0.4, ease: "easeOut" }}
       className="group relative flex flex-col h-full rounded-[2.5rem] bg-white/5 border border-white/10 overflow-hidden hover:border-white/20 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5"
     >
-      {/* Project Image / Pattern Placeholder */}
-      <div className="relative h-48 overflow-hidden bg-white/5">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10 opacity-50 group-hover:scale-110 transition-transform duration-700" />
+      {/* Project Image */}
+      <div className="relative h-56 overflow-hidden bg-white/5">
+        {image && !image.includes('placeholder') ? (
+          <img 
+            src={image} 
+            alt={title}
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+          />
+        ) : (
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-softBlack to-accent/20 opacity-50 group-hover:scale-110 transition-transform duration-700 flex items-center justify-center">
+            <span className="text-white/10 font-black text-4xl uppercase tracking-tighter rotate-12 select-none">
+              {title.split(' ')[0]}
+            </span>
+          </div>
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-softBlack via-transparent to-transparent opacity-60" />
         <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-softBlack/60 backdrop-blur-md border border-white/10 text-[10px] font-bold uppercase tracking-widest text-white/70">
           {context}
         </div>

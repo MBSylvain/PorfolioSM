@@ -5,59 +5,39 @@ import { motion, AnimatePresence } from "framer-motion";
 const projects = [
   {
     id: 1,
-    title: "Site vitrine",
-    tech: "HTML/ CSS",
-    context: "Formation",
-    details: "Création d’un site vitrine pour une association de sport.",
-    liens: "https://keen-frangipane-a2a348.netlify.app/",
-  },
-  {
-    id: 2,
-    title: "Site vitrine de Photgraphe",
-    tech: "React",
-    context: "Formation",
-    details: "Création d’un site vitrine pour un photographe amateur.",
-    liens: "https://projet-charles-quantin-ecf.netlify.app/",
-  },
-  {
-    id: 3,
     title: "Services Web Vitrine",
     tech: "React-Js / Tailwind / SQL",
     context: "Personnel",
     details: "Offre de services web clé en main pour artisans et PME du bâtiment.",
     liens: "https://keen-frangipane-a2a348.netlify.app/",
+    image: "/projects/Plomberie.png",
   },
   {
-    id: 4,
+    id: 2,
     title: "Ecoride — Covoiturage",
     tech: "React / PHP / Tailwind",
     context: "Formation",
     details: "Plateforme de covoiturage écologique avec gestion de trajets.",
     liens: "https://ecoride-hazel.vercel.app/",
+    image: "/projects/Ecoride.png",
   },
   {
-    id: 5,
-    title: "SyncSheet Pro",
+    id: 3,
+    title: "SyncSheet Pro — Révise tes maths",
     tech: "Supabase / Apps Script / React",
     context: "Professionnel",
-    details: "Synchronisation automatique entre Supabase et Excel/Google Sheets.",
+    details: "Synchronisation automatique entre Supabase et Excel/Google Sheets pour une application de révisions mathématiques.",
     liens: "https://brique-lemon.vercel.app/",
+    image: "/projects/Révise tes maths.png",
   },
   {
-    id: 6,
-    title: "Suivi Candidat Alpha",
-    tech: "Vite / Supabase / PostgreSQL",
-    context: "Personnel",
-    details: "Tableau de bord personnalisé pour le suivi des candidatures.",
-    liens: "https://suivi-alpha.vercel.app/",
-  },
-  {
-    id: 7,
+    id: 4,
     title: "Commandes Fournisseurs",
     tech: "Power Apps / Power Automate",
     context: "Professionnel",
     details: "Application interne pour fiabiliser et structurer le processus de commande des conducteurs de travaux.",
     liens: "",
+    image: "/projects/powerapps.png",
   },
 ];
 
@@ -119,6 +99,7 @@ export default function ProjectFilter() {
                 details={project.details}
                 context={project.context}
                 liens={project.liens}
+                image={project.image}
               />
             ))}
           </AnimatePresence>
