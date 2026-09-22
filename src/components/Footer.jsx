@@ -9,11 +9,15 @@ export default function Footer() {
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [isOpen]);
 
   useEffect(() => {
-    function onKey(e) { if (e.key === "Escape") setIsOpen(false); }
+    function onKey(e) {
+      if (e.key === "Escape") setIsOpen(false);
+    }
     if (isOpen) window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [isOpen]);
@@ -37,15 +41,15 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative py-20 bg-softBlack border-t border-white/5 font-sans overflow-hidden">
+    <footer className="relative overflow-hidden border-t border-beigeGray bg-softBlack py-20 font-sans">
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         <div className="flex flex-col md:flex-row items-center justify-between gap-12 mb-16">
           <div className="text-center md:text-left">
-            <h2 className="text-2xl font-extrabold text-white mb-2 tracking-tighter">
+            <h2 className="mb-2 text-2xl font-extrabold tracking-tight text-accent">
               Sylvain <span className="text-primary">MB</span>
             </h2>
-            <p className="text-white/40 text-sm font-light max-w-xs">
-              Développeur web & mobile indépendant spécialisé dans la création 
+            <p className="max-w-xs text-sm font-light text-accent/60">
+              Développeur web & mobile indépendant spécialisé dans la création
               d'expériences numériques sur-mesure.
             </p>
           </div>
@@ -53,9 +57,21 @@ export default function Footer() {
           <div className="flex flex-col items-center md:items-end gap-6">
             <div className="flex items-center gap-4">
               {[
-                { icon: <FaLinkedin />, href: "https://www.linkedin.com/", label: "LinkedIn" },
-                { icon: <FaGithub />, href: "https://github.com/", label: "GitHub" },
-                { icon: <FaEnvelope />, href: "mailto:contact@email.com", label: "Email" },
+                {
+                  icon: <FaLinkedin />,
+                  href: "https://www.linkedin.com/",
+                  label: "LinkedIn",
+                },
+                {
+                  icon: <FaGithub />,
+                  href: "https://github.com/",
+                  label: "GitHub",
+                },
+                {
+                  icon: <FaEnvelope />,
+                  href: "mailto:contact@email.com",
+                  label: "Email",
+                },
               ].map((social) => (
                 <a
                   key={social.label}
@@ -63,27 +79,31 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="w-12 h-12 flex items-center justify-center rounded-2xl bg-white/5 border border-white/10 text-xl text-white/50 hover:text-white hover:border-primary transition-all duration-300"
+                  className="flex h-12 w-12 items-center justify-center border border-beigeGray bg-white/60 text-xl text-accent/50 transition-colors duration-200 hover:border-primary hover:text-primary"
                 >
                   {social.icon}
                 </a>
               ))}
             </div>
-            
+
             <button
               onClick={openModal}
-              className="px-8 py-3 text-sm font-bold text-softBlack bg-white rounded-2xl hover:scale-105 transition-all"
+              className="border border-accent bg-accent px-8 py-3 text-sm font-bold text-white transition-colors hover:bg-primary"
             >
               Me contacter
             </button>
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 pt-12 border-t border-white/5 text-[10px] uppercase tracking-[0.2em] font-semibold text-white/20">
+        <div className="flex flex-col items-center justify-between gap-6 border-t border-beigeGray pt-12 text-[10px] font-semibold uppercase tracking-[0.2em] text-accent/40 md:flex-row">
           <div>© {year} Sylvain MBEUMOU — Tous droits réservés</div>
           <div className="flex gap-8">
-            <a href="#" className="hover:text-white transition-colors">Mentions Légales</a>
-            <a href="#" className="hover:text-white transition-colors">Confidentialité</a>
+            <a href="#" className="hover:text-white transition-colors">
+              Mentions Légales
+            </a>
+            <a href="#" className="hover:text-white transition-colors">
+              Confidentialité
+            </a>
           </div>
         </div>
       </div>
@@ -96,7 +116,7 @@ export default function Footer() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-softBlack/80 backdrop-blur-lg"
+              className="absolute inset-0 bg-accent/40 backdrop-blur-sm"
               onClick={closeModal}
             />
 
@@ -107,21 +127,25 @@ export default function Footer() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative z-10 w-full max-w-2xl bg-[#1a1a1a] border border-white/10 rounded-[2.5rem] p-8 shadow-2xl overflow-hidden"
+              className="relative z-10 w-full max-w-2xl overflow-hidden border border-beigeGray bg-softBlack p-8 shadow-2xl"
             >
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-accent" />
-              
+              <div className="absolute left-0 top-0 h-1 w-full bg-primary" />
+
               <button
                 onClick={closeModal}
-                className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center bg-white/5 rounded-full text-white/50 hover:text-white hover:bg-white/10 transition-colors"
+                className="absolute right-6 top-6 flex h-10 w-10 items-center justify-center border border-beigeGray text-accent/50 transition-colors hover:border-primary hover:text-primary"
                 aria-label="Fermer"
               >
                 ✕
               </button>
 
               <div className="mb-8">
-                <h2 className="text-3xl font-bold text-white mb-2">Un message ?</h2>
-                <p className="text-white/50">Je serai ravi d'en savoir plus sur votre projet.</p>
+                <h2 className="mb-2 text-3xl font-bold text-accent">
+                  Un message ?
+                </h2>
+                <p className="text-accent/60">
+                  Je serai ravi d'en savoir plus sur votre parcours.
+                </p>
               </div>
 
               <ContactForm />
@@ -132,4 +156,3 @@ export default function Footer() {
     </footer>
   );
 }
-

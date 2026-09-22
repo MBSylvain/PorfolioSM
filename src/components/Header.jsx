@@ -18,24 +18,21 @@ export default function Header() {
 
   const navLinks = [
     { name: "À propos", href: "#about" },
-    { name: "Services", href: "#services" },
     { name: "Projets", href: "#projects" },
   ];
 
   return (
-    <header 
-      className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-500 px-6 py-4 mr-0 font-sans`}
-    >
-      <div 
-        className={`max-w-6xl mx-auto flex items-center justify-between px-6 py-3 rounded-2xl transition-all duration-500 border ${
-          scrolled 
-            ? "bg-softBlack/70 backdrop-blur-xl border-white/10 shadow-2xl" 
-            : "bg-transparent border-transparent"
+    <header className="fixed top-0 left-0 right-0 z-[60] px-6 py-4 font-sans">
+      <div
+        className={`max-w-6xl mx-auto flex items-center justify-between px-6 py-3 border-b transition-colors duration-200 ${
+          scrolled
+            ? "border-beigeGray bg-softBlack/95"
+            : "border-transparent bg-softBlack/80"
         }`}
       >
         <a
           href="/"
-          className="text-xl font-extrabold text-white tracking-tighter"
+          className="text-xl font-extrabold tracking-tight text-accent"
           aria-label="Accueil"
         >
           Sylvain <span className="text-primary">MB</span>
@@ -47,14 +44,14 @@ export default function Header() {
             <a
               key={link.name}
               href={link.href}
-              className="text-sm font-medium text-white/70 hover:text-white transition-colors"
+              className="text-sm font-medium text-accent/65 transition-colors hover:text-primary"
             >
               {link.name}
             </a>
           ))}
           <button
             onClick={openContact}
-            className="px-5 py-2 text-sm font-semibold text-softBlack bg-white rounded-xl hover:scale-105 active:scale-95 transition-all"
+            className="border border-accent bg-accent px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-primary"
           >
             Contact
           </button>
@@ -62,7 +59,7 @@ export default function Header() {
 
         {/* Mobile Toggle */}
         <button
-          className="p-2 text-white/70 hover:text-white md:hidden transition-colors"
+          className="p-2 text-accent transition-colors hover:text-primary md:hidden"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
         >
@@ -77,13 +74,13 @@ export default function Header() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="absolute top-24 left-6 right-6 bg-softBlack/95 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 shadow-2xl flex flex-col items-center gap-6 md:hidden"
+            className="absolute left-6 right-6 top-24 flex flex-col items-center gap-6 border border-beigeGray bg-softBlack p-8 shadow-lg md:hidden"
           >
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="text-lg font-medium text-white/70 hover:text-white"
+                className="text-lg font-medium text-accent/70 hover:text-primary"
                 onClick={() => setMenuOpen(false)}
               >
                 {link.name}
@@ -94,7 +91,7 @@ export default function Header() {
                 setMenuOpen(false);
                 openContact();
               }}
-              className="w-full py-4 text-softBlack bg-white font-bold rounded-2xl"
+              className="w-full border border-accent bg-accent py-4 font-bold text-white"
             >
               Contact
             </button>
@@ -104,4 +101,3 @@ export default function Header() {
     </header>
   );
 }
-

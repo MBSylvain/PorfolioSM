@@ -1,6 +1,6 @@
-import React from 'react';
-import { FaArrowRight } from 'react-icons/fa';
-import { motion } from 'framer-motion';
+import React from "react";
+import { FaArrowRight } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 export default function ProjectCard({ title, tech, details, context, liens }) {
   return (
@@ -10,24 +10,24 @@ export default function ProjectCard({ title, tech, details, context, liens }) {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.9 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
-      className="group relative flex flex-col h-full rounded-[2.5rem] bg-white/5 border border-white/10 overflow-hidden hover:border-white/20 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5"
+      className="group relative flex h-full flex-col overflow-hidden border border-beigeGray bg-white/75 transition-colors duration-200 hover:border-primary hover:bg-white"
     >
       {/* Project Image / Pattern Placeholder */}
-      <div className="relative h-48 overflow-hidden bg-white/5">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10 opacity-50 group-hover:scale-110 transition-transform duration-700" />
-        <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-softBlack/60 backdrop-blur-md border border-white/10 text-[10px] font-bold uppercase tracking-widest text-white/70">
+      <div className="relative h-32 overflow-hidden border-b border-beigeGray bg-blueGray/10">
+        <div className="absolute inset-x-0 bottom-0 h-1 bg-primary" />
+        <div className="absolute left-5 top-5 border border-beigeGray bg-softBlack px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-accent/70">
           {context}
         </div>
       </div>
 
-      <div className="p-8 flex flex-col flex-grow">
-        <h3 className="text-xl font-bold text-white mb-2 group-hover:text-primary transition-colors duration-300">
+      <div className="flex flex-grow flex-col p-7">
+        <h3 className="mb-2 text-xl font-bold text-accent transition-colors duration-200 group-hover:text-primary">
           {title}
         </h3>
-        <p className="text-xs font-semibold text-primary/60 uppercase tracking-[0.2em] mb-4">
+        <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
           {tech}
         </p>
-        <p className="text-white/50 text-sm font-light leading-relaxed mb-6 flex-grow">
+        <p className="mb-6 flex-grow text-sm font-light leading-relaxed text-accent/65">
           {details}
         </p>
 
@@ -36,16 +36,16 @@ export default function ProjectCard({ title, tech, details, context, liens }) {
             href={liens}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-sm font-bold text-white group/btn"
+            className="group/btn inline-flex items-center gap-2 text-sm font-bold text-accent"
           >
             <span className="relative">
               Voir le projet
-              <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-primary group-hover/btn:w-full transition-all duration-300" />
+              <span className="absolute -bottom-1 left-0 h-px w-0 bg-primary transition-all duration-200 group-hover/btn:w-full" />
             </span>
-            <FaArrowRight className="text-[10px] -rotate-45 group-hover/btn:rotate-0 transition-transform duration-300 text-primary" />
+            <FaArrowRight className="-rotate-45 text-[10px] text-primary transition-transform duration-200 group-hover/btn:rotate-0" />
           </a>
         ) : (
-          <span className="text-[10px] uppercase tracking-widest text-white/20 font-bold">
+          <span className="text-[10px] font-bold uppercase tracking-widest text-accent/35">
             Project interne / Privé
           </span>
         )}

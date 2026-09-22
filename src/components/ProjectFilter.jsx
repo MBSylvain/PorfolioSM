@@ -24,7 +24,8 @@ const projects = [
     title: "Services Web Vitrine",
     tech: "React-Js / Tailwind / SQL",
     context: "Personnel",
-    details: "Offre de services web clé en main pour artisans et PME du bâtiment.",
+    details:
+      "Offre de services web clé en main pour artisans et PME du bâtiment.",
     liens: "https://keen-frangipane-a2a348.netlify.app/",
   },
   {
@@ -40,7 +41,8 @@ const projects = [
     title: "SyncSheet Pro",
     tech: "Supabase / Apps Script / React",
     context: "Professionnel",
-    details: "Synchronisation automatique entre Supabase et Excel/Google Sheets.",
+    details:
+      "Synchronisation automatique entre Supabase et Excel/Google Sheets.",
     liens: "https://brique-lemon.vercel.app/",
   },
   {
@@ -56,7 +58,8 @@ const projects = [
     title: "Commandes Fournisseurs",
     tech: "Power Apps / Power Automate",
     context: "Professionnel",
-    details: "Application interne pour fiabiliser et structurer le processus de commande des conducteurs de travaux.",
+    details:
+      "Application interne pour fiabiliser et structurer le processus de commande des conducteurs de travaux.",
     liens: "",
   },
 ];
@@ -69,34 +72,45 @@ export default function ProjectFilter() {
   const categories = ["All", "Formation", "Personnel", "Professionnel"];
 
   return (
-    <section id="projects" className="px-6 py-32 bg-softBlack overflow-hidden">
+    <section
+      id="projects"
+      className="overflow-hidden border-t border-beigeGray bg-softBlack px-6 py-32"
+    >
       <div className="max-w-6xl mx-auto">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="mb-16 text-left"
         >
-          <h2 className="text-sm uppercase tracking-[0.4em] text-secondary font-bold mb-4">Portfolio</h2>
-          <h3 className="text-4xl md:text-5xl font-extrabold text-white">Sélection de <br/><span className="text-white/40">réalisations.</span></h3>
+          <h2 className="mb-4 text-sm font-bold uppercase tracking-[0.4em] text-primary">
+            Portfolio
+          </h2>
+          <h3 className="text-4xl font-extrabold text-accent md:text-5xl">
+            Sélection de <span className="text-accent/40">réalisations.</span>
+          </h3>
         </motion.div>
 
         {/* Filter Tabs */}
         <div className="flex flex-wrap justify-center gap-2 mb-16">
-          <div className="flex p-1 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl">
+          <div className="flex flex-wrap gap-1 border border-beigeGray bg-white/60 p-1">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setFilter(cat)}
-                className={`relative px-6 py-2.5 text-xs font-semibold uppercase tracking-wider rounded-xl transition-all duration-300 ${
-                  filter === cat ? "text-softBlack" : "text-white/50 hover:text-white"
+                className={`relative px-5 py-2.5 text-xs font-semibold uppercase tracking-wider transition-colors duration-200 ${
+                  filter === cat
+                    ? "bg-accent text-white"
+                    : "text-accent/55 hover:text-primary"
                 }`}
               >
-                <span className="relative z-10">{cat === "All" ? "Tous" : cat}</span>
+                <span className="relative z-10">
+                  {cat === "All" ? "Tous" : cat}
+                </span>
                 {filter === cat && (
-                  <motion.div 
+                  <motion.div
                     layoutId="activeTab"
-                    className="absolute inset-x-0 inset-y-0 bg-white rounded-[10px] shadow-lg"
+                    className="absolute inset-0 -z-0 bg-accent"
                     transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                   />
                 )}
@@ -106,9 +120,9 @@ export default function ProjectFilter() {
         </div>
 
         {/* Projects Grid */}
-        <motion.div 
+        <motion.div
           layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
         >
           <AnimatePresence mode="popLayout">
             {filtered.map((project) => (

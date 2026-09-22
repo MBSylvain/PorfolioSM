@@ -82,12 +82,14 @@ export default function ContactForm() {
     <div className="w-full">
       {status === "success" ? (
         <div className="flex flex-col items-center justify-center py-12 text-center">
-          <div className="w-20 h-20 bg-primary/20 text-primary rounded-full flex items-center justify-center text-4xl mb-6 animate-bounce">
+          <div className="mb-6 flex h-20 w-20 items-center justify-center border border-primary/30 bg-primary/10 text-4xl text-primary">
             <FaCheckCircle />
           </div>
-          <h3 className="text-2xl font-bold text-white mb-2">Message envoyé !</h3>
-          <p className="text-white/50">Merci, je reviendrai vers vous dans les plus brefs délais.</p>
-          <button 
+          <h3 className="mb-2 text-2xl font-bold text-accent">
+            Message envoyé !
+          </h3>
+          <p className="text-accent/60">Merci pour votre message.</p>
+          <button
             onClick={() => setStatus("idle")}
             className="mt-8 text-xs text-primary underline hover:text-white transition-colors"
           >
@@ -97,15 +99,20 @@ export default function ContactForm() {
       ) : (
         <form onSubmit={handleSubmit} noValidate className="space-y-6">
           {status === "error" && (
-            <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-2xl flex items-center gap-3 text-red-500 text-sm">
+            <div className="flex items-center gap-3 border border-red-500/30 bg-red-50 p-4 text-sm text-red-600">
               <FaExclamationTriangle />
-              <span>Oups ! Une erreur est survenue. Veuillez réessayer plus tard.</span>
+              <span>
+                Oups ! Une erreur est survenue. Veuillez réessayer plus tard.
+              </span>
             </div>
           )}
 
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <div className="space-y-2">
-              <label htmlFor="firstName" className="text-[10px] uppercase tracking-widest font-bold text-white/40 flex items-center gap-2">
+              <label
+                htmlFor="firstName"
+                className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-accent/55"
+              >
                 <FaUser className="text-primary" /> Prénom
               </label>
               <input
@@ -114,11 +121,14 @@ export default function ContactForm() {
                 value={values.firstName}
                 onChange={handleChange}
                 placeholder="Ex: Sylvain"
-                className={`w-full px-5 py-4 bg-white/5 border rounded-2xl text-white placeholder-white/20 transition-all focus:outline-none focus:ring-2 focus:ring-primary/50 ${errors.firstName ? "border-red-500/50" : "border-white/10"}`}
+                className={`w-full border bg-white/70 px-5 py-4 text-accent placeholder-accent/35 transition-colors focus:outline-none focus:ring-2 focus:ring-primary/30 ${errors.firstName ? "border-red-500/50" : "border-beigeGray"}`}
               />
             </div>
             <div className="space-y-2">
-              <label htmlFor="name" className="text-[10px] uppercase tracking-widest font-bold text-white/40 flex items-center gap-2">
+              <label
+                htmlFor="name"
+                className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-accent/55"
+              >
                 <FaUser className="text-primary" /> Nom
               </label>
               <input
@@ -127,13 +137,16 @@ export default function ContactForm() {
                 value={values.name}
                 onChange={handleChange}
                 placeholder="Ex: Mbeumou"
-                className={`w-full px-5 py-4 bg-white/5 border rounded-2xl text-white placeholder-white/20 transition-all focus:outline-none focus:ring-2 focus:ring-primary/50 ${errors.name ? "border-red-500/50" : "border-white/10"}`}
+                className={`w-full border bg-white/70 px-5 py-4 text-accent placeholder-accent/35 transition-colors focus:outline-none focus:ring-2 focus:ring-primary/30 ${errors.name ? "border-red-500/50" : "border-beigeGray"}`}
               />
             </div>
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="email" className="text-[10px] uppercase tracking-widest font-bold text-white/40 flex items-center gap-2">
+            <label
+              htmlFor="email"
+              className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-accent/55"
+            >
               <FaEnvelope className="text-primary" /> Adresse Email
             </label>
             <input
@@ -142,30 +155,35 @@ export default function ContactForm() {
               value={values.email}
               onChange={handleChange}
               placeholder="votre@email.com"
-              className={`w-full px-5 py-4 bg-white/5 border rounded-2xl text-white placeholder-white/20 transition-all focus:outline-none focus:ring-2 focus:ring-primary/50 ${errors.email ? "border-red-500/50" : "border-white/10"}`}
+              className={`w-full border bg-white/70 px-5 py-4 text-accent placeholder-accent/35 transition-colors focus:outline-none focus:ring-2 focus:ring-primary/30 ${errors.email ? "border-red-500/50" : "border-beigeGray"}`}
             />
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="subject" className="text-[10px] uppercase tracking-widest font-bold text-white/40">
+            <label
+              htmlFor="subject"
+              className="text-[10px] font-bold uppercase tracking-widest text-accent/55"
+            >
               Objet de la demande
             </label>
             <select
               id="subject"
               value={values.subject}
               onChange={handleChange}
-              className={`w-full px-5 py-4 bg-white/5 border rounded-2xl text-white appearance-none transition-all focus:outline-none focus:ring-2 focus:ring-primary/50 ${errors.subject ? "border-red-500/50" : "border-white/10"}`}
+              className={`w-full appearance-none border bg-white/70 px-5 py-4 text-accent transition-colors focus:outline-none focus:ring-2 focus:ring-primary/30 ${errors.subject ? "border-red-500/50" : "border-beigeGray"}`}
             >
-              <option value="" className="bg-softBlack text-white">Sélectionnez un service</option>
-              <option value="vitrine" className="bg-softBlack text-white">Site Vitrine</option>
-              <option value="developpement" className="bg-softBlack text-white">Application Web (SaaS, Portal)</option>
-              <option value="maintenance" className="bg-softBlack text-white">Maintenance / Refonte</option>
-              <option value="autre" className="bg-softBlack text-white">Autre demande</option>
+              <option value="">Sujet du message</option>
+              <option value="parcours">À propos de mon parcours</option>
+              <option value="projet">Échanger sur un projet</option>
+              <option value="autre">Autre demande</option>
             </select>
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="message" className="text-[10px] uppercase tracking-widest font-bold text-white/40">
+            <label
+              htmlFor="message"
+              className="text-[10px] font-bold uppercase tracking-widest text-accent/55"
+            >
               Votre Message
             </label>
             <textarea
@@ -173,14 +191,14 @@ export default function ContactForm() {
               value={values.message}
               onChange={handleChange}
               placeholder="Dites-moi en plus sur votre projet..."
-              className={`w-full h-40 px-5 py-4 bg-white/5 border rounded-2xl text-white placeholder-white/20 transition-all focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none ${errors.message ? "border-red-500/50" : "border-white/10"}`}
+              className={`h-40 w-full resize-none border bg-white/70 px-5 py-4 text-accent placeholder-accent/35 transition-colors focus:outline-none focus:ring-2 focus:ring-primary/30 ${errors.message ? "border-red-500/50" : "border-beigeGray"}`}
             />
           </div>
 
           <button
             type="submit"
             disabled={status === "loading"}
-            className="w-full flex items-center justify-center gap-3 py-5 bg-primary text-softBlack font-extrabold rounded-2xl hover:scale-[1.02] active:scale-95 transition-all shadow-[0_20px_40px_-15px_rgba(20,184,166,0.3)] disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex w-full items-center justify-center gap-3 bg-primary py-5 font-extrabold text-white transition-colors hover:bg-accent disabled:cursor-not-allowed disabled:opacity-50"
           >
             {status === "loading" ? (
               <>
@@ -197,5 +215,3 @@ export default function ContactForm() {
     </div>
   );
 }
-
-
