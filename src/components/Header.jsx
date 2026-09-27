@@ -18,6 +18,7 @@ export default function Header() {
 
   const navLinks = [
     { name: "À propos", href: "#about" },
+    { name: "CMS", href: "#cms" },
     { name: "Projets", href: "#projects" },
   ];
 

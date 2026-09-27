@@ -2,6 +2,7 @@ import React from "react";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import About from "./components/About";
+import Cms from "./components/Cms";
 import ProjectFilter from "./components/ProjectFilter";
 import Skills from "./components/Skills";
 import ContactForm from "./components/ContactForm";
@@ -17,6 +18,7 @@ function App() {
       <main className="flex-grow relative z-10">
         <Hero />
         <About />
+        <Cms />
         <ProjectFilter />
       </main>
 
