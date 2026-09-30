@@ -9,9 +9,33 @@
 
   body {
     margin: 0;
-    background: #f3f5f7;
-    color: #0f172a;
-    font-family: "Outfit", ui-sans-serif, system-ui, sans-serif;
+    background: #f4f0e8;
+    color: #1e2522;
+    font-family: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  }
+
+  ::selection {
+    background: #c64f37;
+    color: #fcfaf5;
+  }
+
+  :focus-visible {
+    outline: 2px solid #c64f37;
+    outline-offset: 3px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 

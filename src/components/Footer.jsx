@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaLinkedin, FaGithub, FaEnvelope } from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa";
 import ContactForm from "./ContactForm";
 
 export default function Footer() {
@@ -41,70 +41,34 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative overflow-hidden border-t border-beigeGray bg-softBlack py-20 font-sans">
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-12 mb-16">
-          <div className="text-center md:text-left">
-            <h2 className="mb-2 text-2xl font-extrabold tracking-tight text-accent">
-              Sylvain <span className="text-primary">MB</span>
+    <footer className="border-t border-accent bg-accent px-5 py-16 text-offWhite md:py-20">
+      <div className="relative z-10 mx-auto max-w-6xl">
+        <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
+          <div>
+            <p className="mb-4 font-mono text-xs uppercase text-secondary">
+              Et maintenant ?
+            </p>
+            <h2 className="mb-4 max-w-2xl font-display text-5xl font-normal leading-none md:text-6xl">
+              Un outil à simplifier ?
             </h2>
-            <p className="max-w-xs text-sm font-light text-accent/60">
-              Développeur web & mobile indépendant spécialisé dans la création
-              d'expériences numériques sur-mesure.
+            <p className="max-w-lg text-sm leading-6 text-offWhite/65">
+              Parlons de votre besoin, de votre équipe et de la solution qui
+              pourrait vous aider.
             </p>
           </div>
-
-          <div className="flex flex-col items-center md:items-end gap-6">
-            <div className="flex items-center gap-4">
-              {[
-                {
-                  icon: <FaLinkedin />,
-                  href: "https://www.linkedin.com/",
-                  label: "LinkedIn",
-                },
-                {
-                  icon: <FaGithub />,
-                  href: "https://github.com/",
-                  label: "GitHub",
-                },
-                {
-                  icon: <FaEnvelope />,
-                  href: "mailto:contact@email.com",
-                  label: "Email",
-                },
-              ].map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={social.label}
-                  className="flex h-12 w-12 items-center justify-center border border-beigeGray bg-white/60 text-xl text-accent/50 transition-colors duration-200 hover:border-primary hover:text-primary"
-                >
-                  {social.icon}
-                </a>
-              ))}
-            </div>
-
-            <button
-              onClick={openModal}
-              className="border border-accent bg-accent px-8 py-3 text-sm font-bold text-white transition-colors hover:bg-primary"
-            >
-              Me contacter
-            </button>
-          </div>
+          <button
+            onClick={openModal}
+            className="inline-flex items-center justify-center gap-3 justify-self-start bg-primary px-6 py-4 text-sm font-semibold text-white transition-colors hover:bg-offWhite hover:text-accent md:justify-self-end"
+          >
+            Me contacter <FaArrowRight />
+          </button>
         </div>
 
-        <div className="flex flex-col items-center justify-between gap-6 border-t border-beigeGray pt-12 text-[10px] font-semibold uppercase tracking-[0.2em] text-accent/40 md:flex-row">
-          <div>© {year} Sylvain MBEUMOU — Tous droits réservés</div>
-          <div className="flex gap-8">
-            <a href="#" className="hover:text-white transition-colors">
-              Mentions Légales
-            </a>
-            <a href="#" className="hover:text-white transition-colors">
-              Confidentialité
-            </a>
-          </div>
+        <div className="mt-14 flex flex-col justify-between gap-4 border-t border-white/20 pt-5 font-mono text-[10px] uppercase text-offWhite/55 sm:flex-row sm:items-center">
+          <span>© {year} Sylvain MBEUMOU</span>
+          <a href="#projects" className="transition-colors hover:text-offWhite">
+            Retour aux projets ↑
+          </a>
         </div>
       </div>
 
@@ -141,10 +105,10 @@ export default function Footer() {
 
               <div className="mb-8">
                 <h2 className="mb-2 text-3xl font-bold text-accent">
-                  Un message ?
+                  Parlons de votre projet
                 </h2>
                 <p className="text-accent/60">
-                  Je serai ravi d'en savoir plus sur votre parcours.
+                  Décrivez le besoin que vous souhaitez résoudre.
                 </p>
               </div>
 

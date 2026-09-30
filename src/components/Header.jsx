@@ -4,36 +4,25 @@ import { FaBars, FaTimes } from "react-icons/fa";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const openContact = () => {
     window.dispatchEvent(new CustomEvent("openContactModal"));
   };
 
   const navLinks = [
+    { name: "Projets", href: "#projects" },
     { name: "À propos", href: "#about" },
     { name: "CMS", href: "#cms" },
-    { name: "Projets", href: "#projects" },
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-[60] px-6 py-4 font-sans">
+    <header className="sticky top-0 z-[60] border-b border-beigeGray bg-softBlack/95 px-5 py-3 backdrop-blur">
       <div
-        className={`max-w-6xl mx-auto flex items-center justify-between px-6 py-3 border-b transition-colors duration-200 ${
-          scrolled
-            ? "border-beigeGray bg-softBlack/95"
-            : "border-transparent bg-softBlack/80"
-        }`}
+        className="mx-auto flex max-w-6xl items-center justify-between"
       >
         <a
           href="/"
-          className="text-xl font-extrabold tracking-tight text-accent"
+          className="font-display text-2xl text-accent"
           aria-label="Accueil"
         >
           Sylvain <span className="text-primary">MB</span>
@@ -45,14 +34,14 @@ export default function Header() {
             <a
               key={link.name}
               href={link.href}
-              className="text-sm font-medium text-accent/65 transition-colors hover:text-primary"
+              className="text-sm font-medium text-accent/70 transition-colors hover:text-primary"
             >
               {link.name}
             </a>
           ))}
           <button
             onClick={openContact}
-            className="border border-accent bg-accent px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-primary"
+            className="bg-primary px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent"
           >
             Contact
           </button>
@@ -60,9 +49,10 @@ export default function Header() {
 
         {/* Mobile Toggle */}
         <button
-          className="p-2 text-accent transition-colors hover:text-primary md:hidden"
+          className="flex h-11 w-11 items-center justify-center border border-beigeGray text-accent transition-colors hover:border-primary hover:text-primary md:hidden"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+          aria-expanded={menuOpen}
         >
           {menuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
         </button>
@@ -75,7 +65,7 @@ export default function Header() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="absolute left-6 right-6 top-24 flex flex-col items-center gap-6 border border-beigeGray bg-softBlack p-8 shadow-lg md:hidden"
+            className="absolute left-5 right-5 top-full flex flex-col items-center gap-6 border border-beigeGray bg-offWhite p-7 shadow-lg md:hidden"
           >
             {navLinks.map((link) => (
               <a
@@ -92,7 +82,7 @@ export default function Header() {
                 setMenuOpen(false);
                 openContact();
               }}
-              className="w-full border border-accent bg-accent py-4 font-bold text-white"
+              className="w-full bg-primary py-4 font-bold text-white"
             >
               Contact
             </button>

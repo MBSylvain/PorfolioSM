@@ -4,19 +4,21 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Outfit", "ui-sans-serif", "system-ui"],
+        sans: ["DM Sans", "ui-sans-serif", "system-ui"],
+        display: ["Instrument Serif", "Georgia", "serif"],
+        mono: ["DM Mono", "monospace"],
       },
       colors: {
-        grayLight: "#F5F5F5",
-        grayMedium: "#B0B0B0",
-        grayDark: "#333333",
-        offWhite: "#FAFAFA",
-        softBlack: "#f3f5f7",
-        blueGray: "#52606d",
-        beigeGray: "#d9dee3",
-        primary: "#2457ff",
-        accent: "#0f172a",
-        secondary: "#e85d3f",
+        grayLight: "#F1EEE6",
+        grayMedium: "#77786F",
+        grayDark: "#242925",
+        offWhite: "#FCFAF5",
+        softBlack: "#F4F0E8",
+        blueGray: "#69746E",
+        beigeGray: "#D8D2C5",
+        primary: "#C64F37",
+        accent: "#1E2522",
+        secondary: "#71836D",
       },
       animation: {
         blob: "blob 7s infinite",

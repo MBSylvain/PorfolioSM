@@ -39,7 +39,7 @@ export default function Cms() {
   return (
     <section
       id="cms"
-      className="scroll-mt-24 border-t border-beigeGray bg-white/50 px-6 py-24 text-accent md:py-32"
+      className="scroll-mt-20 border-t border-accent bg-accent px-5 py-20 text-offWhite md:py-24"
     >
       <div className="mx-auto max-w-6xl">
         <motion.div
@@ -47,15 +47,15 @@ export default function Cms() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-14 max-w-3xl"
+          className="mb-12 max-w-3xl"
         >
-          <p className="mb-4 text-sm font-bold uppercase tracking-[0.3em] text-primary">
-            Gestion de contenu
+          <p className="mb-4 font-mono text-xs uppercase text-secondary">
+            03 / Gestion de contenu
           </p>
-          <h2 className="mb-6 text-4xl font-extrabold leading-tight md:text-5xl">
+          <h2 className="mb-5 font-display text-5xl font-normal leading-none md:text-6xl">
             Un site que l'on peut faire vivre.
           </h2>
-          <p className="max-w-2xl text-lg font-light leading-relaxed text-accent/65">
+          <p className="max-w-2xl text-base leading-7 text-offWhite/70">
             Un CMS (système de gestion de contenu) permet de créer et mettre à
             jour les pages d'un site depuis une interface dédiée, sans modifier
             le code à chaque changement. C'est une solution pertinente quand
@@ -69,21 +69,21 @@ export default function Cms() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="h-fit border-l-2 border-primary pl-6"
+            className="h-fit border-l border-secondary pl-6"
           >
-            <h3 className="mb-4 text-xl font-bold">Pourquoi choisir cette solution ?</h3>
-            <p className="mb-5 leading-relaxed text-accent/65">
+            <h3 className="mb-4 font-display text-2xl font-normal">Choisir le bon outil.</h3>
+            <p className="mb-5 text-sm leading-6 text-offWhite/70">
               Les contenus deviennent plus simples à actualiser, la publication
               est plus rapide et des extensions peuvent répondre à des besoins
               courants.
             </p>
-            <p className="text-sm leading-relaxed text-accent/55">
+            <p className="text-sm leading-6 text-offWhite/60">
               Le bon choix dépend du projet : budget, autonomie, sécurité,
               maintenance et niveau de personnalisation sont à prendre en compte.
             </p>
           </motion.aside>
 
-          <div className="divide-y divide-beigeGray border-y border-beigeGray">
+          <div className="divide-y divide-white/15 border-y border-white/20">
             {cmsGroups.map((group, index) => (
               <motion.article
                 key={group.number}
@@ -91,21 +91,21 @@ export default function Cms() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.08, duration: 0.45 }}
-                className="grid gap-3 py-6 sm:grid-cols-[3rem_1fr_auto] sm:items-start sm:gap-5"
+                className="grid gap-3 py-5 sm:grid-cols-[3rem_1fr_auto] sm:items-start sm:gap-5"
               >
-                <span className="text-sm font-semibold tabular-nums text-primary">
+                <span className="font-mono text-xs tabular-nums text-secondary">
                   {group.number}
                 </span>
                 <div>
-                  <h3 className="mb-1 text-lg font-bold">{group.name}</h3>
-                  <p className="mb-2 text-sm font-semibold text-primary/90">
+                  <h3 className="mb-1 font-display text-2xl font-normal">{group.name}</h3>
+                  <p className="mb-2 font-mono text-xs text-secondary">
                     {group.platforms}
                   </p>
-                  <p className="max-w-xl leading-relaxed text-accent/60">
+                  <p className="max-w-xl text-sm leading-6 text-offWhite/65">
                     {group.description}
                   </p>
                 </div>
-                <span className="text-xs font-medium uppercase tracking-wider text-accent/45 sm:max-w-36 sm:text-right">
+                <span className="font-mono text-[10px] uppercase text-offWhite/50 sm:max-w-36 sm:text-right">
                   {group.fit}
                 </span>
               </motion.article>
@@ -113,9 +113,6 @@ export default function Cms() {
           </div>
         </div>
 
-        <p className="mt-8 text-xs text-accent/45">
-          Panorama des principales solutions, présenté à titre informatif.
-        </p>
       </div>
     </section>
   );

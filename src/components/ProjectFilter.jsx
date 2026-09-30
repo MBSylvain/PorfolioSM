@@ -13,7 +13,7 @@ const projects = [
   },
   {
     id: 2,
-    title: "Site vitrine de Photgraphe",
+    title: "Site vitrine de photographe",
     tech: "React",
     context: "Formation",
     details: "Création d’un site vitrine pour un photographe amateur.",
@@ -27,6 +27,13 @@ const projects = [
     details:
       "Offre de services web clé en main pour artisans et PME du bâtiment.",
     liens: "https://keen-frangipane-a2a348.netlify.app/",
+    images: [
+      {
+        src: "/projects/Plomberie.png",
+        label: "Site plomberie",
+        alt: "Aperçu du site vitrine Plomberie",
+      },
+      ],
   },
   {
     id: 4,
@@ -35,6 +42,13 @@ const projects = [
     context: "Formation",
     details: "Plateforme de covoiturage écologique avec gestion de trajets.",
     liens: "https://ecoride-hazel.vercel.app/",
+    images: [
+      {
+        src: "/projects/Ecoride.png",
+        label: "Ecoride",
+        alt: "Aperçu de la plateforme de covoiturage Ecoride",
+      },
+    ],
   },
   {
     id: 5,
@@ -61,6 +75,14 @@ const projects = [
     details:
       "Application interne pour fiabiliser et structurer le processus de commande des conducteurs de travaux.",
     liens: "",
+    featured: true,
+    images: [
+      {
+        src: "/projects/powerapps.png",
+        label: "Commandes Fournisseurs",
+        alt: "Écran de l’application Power Apps Commandes Fournisseurs",
+      },
+    ],
   },
 ];
 
@@ -74,55 +96,51 @@ export default function ProjectFilter() {
   return (
     <section
       id="projects"
-      className="overflow-hidden border-t border-beigeGray bg-softBlack px-6 py-32"
+      className="overflow-hidden border-t border-beigeGray bg-softBlack px-5 py-14 md:px-6 md:py-28"
     >
-      <div className="max-w-6xl mx-auto">
+      <div className="mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-16 text-left"
+          className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between"
         >
-          <h2 className="mb-4 text-sm font-bold uppercase tracking-[0.4em] text-primary">
-            Portfolio
-          </h2>
-          <h3 className="text-4xl font-extrabold text-accent md:text-5xl">
-            Sélection de <span className="text-accent/40">réalisations.</span>
-          </h3>
+          <div>
+            <p className="mb-4 font-mono text-xs uppercase text-primary">
+              01 / Travaux choisis
+            </p>
+            <h2 className="font-display text-5xl font-normal leading-none text-accent md:text-6xl">
+              Des idées
+              <br />
+              <span className="text-primary italic">mises en œuvre.</span>
+            </h2>
+          </div>
+          <p className="max-w-sm text-base leading-7 text-accent/65">
+            Applications métiers, sites web et outils conçus pour répondre à un
+            besoin concret.
+          </p>
         </motion.div>
 
-        {/* Filter Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 mb-16">
-          <div className="flex flex-wrap gap-1 border border-beigeGray bg-white/60 p-1">
+        <div className="mb-10 flex flex-wrap gap-x-7 gap-y-3 border-b border-beigeGray">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setFilter(cat)}
-                className={`relative px-5 py-2.5 text-xs font-semibold uppercase tracking-wider transition-colors duration-200 ${
+                aria-pressed={filter === cat}
+                className={`border-b-2 px-1 py-3 text-xs font-semibold uppercase transition-colors duration-200 ${
                   filter === cat
-                    ? "bg-accent text-white"
-                    : "text-accent/55 hover:text-primary"
+                    ? "border-primary text-primary"
+                    : "border-transparent text-accent/55 hover:text-primary"
                 }`}
               >
-                <span className="relative z-10">
-                  {cat === "All" ? "Tous" : cat}
-                </span>
-                {filter === cat && (
-                  <motion.div
-                    layoutId="activeTab"
-                    className="absolute inset-0 -z-0 bg-accent"
-                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                  />
-                )}
+                {cat === "All" ? "Tous les projets" : cat}
               </button>
             ))}
-          </div>
         </div>
 
-        {/* Projects Grid */}
         <motion.div
           layout
-          className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
+          className="grid grid-cols-1 gap-x-10 gap-y-14 md:grid-cols-2 md:gap-y-20"
         >
           <AnimatePresence mode="popLayout">
             {filtered.map((project) => (
@@ -133,6 +151,9 @@ export default function ProjectFilter() {
                 details={project.details}
                 context={project.context}
                 liens={project.liens}
+                images={project.images}
+                featured={project.featured}
+                index={String(project.id).padStart(2, "0")}
               />
             ))}
           </AnimatePresence>
