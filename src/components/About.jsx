@@ -17,6 +17,11 @@ export default function About() {
       title: "Automatisations",
       detail: "Flux Power Automate pour réduire les tâches répétitives.",
     },
+    {
+      number: "04",
+      title: "Développement assisté par IA",
+      detail: "Utilisation stratégique de l'IA pour prototyper, refactorer et tester plus efficacement, sous validation humaine stricte.",
+    },
   ];
 
   return (

@@ -88,7 +88,8 @@ export default function Hero() {
           </h1>
           <p className="mb-4 max-w-xl text-base leading-7 text-accent/70 md:mb-9 md:text-lg">
             Je suis Sylvain MBEUMOU. Je conçois des applications web et métiers
-            qui simplifient le quotidien des équipes.
+            qui simplifient le quotidien des équipes, en combinant expertise métier,
+            développement qualité et IA pour accélérer la livraison.
           </p>
           <div className="flex flex-wrap items-center gap-x-7 gap-y-4">
             <a
